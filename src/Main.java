@@ -9,7 +9,11 @@ public class Main {
     //int freqResult = d1.calibrateFrequency(file);
     //System.out.println(freqResult);
 
+    long sTime = System.nanoTime();
     int freqTwice = d1.calibrateFrequencyTwice(file);
+    long eTime = System.nanoTime();
+
     System.out.println(freqTwice);
+    System.out.println("Duration: " + (eTime - sTime) / 1000000 + "ms");
   }
 }
