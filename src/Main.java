@@ -1,19 +1,27 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Main {
 
   public static void main(String[] args) throws IOException {
-    String file = "src\\Day01Input.txt";
-    Day01 d1 = new Day01();
 
+    //DAY 01
+    //String file = "src\\Day01Input.txt";
+    //Day01 d1 = new Day01();
     //int freqResult = d1.calibrateFrequency(file);
-    //System.out.println(freqResult);
+    //int freqTwice = d1.calibrateFrequencyTwice(file);
+
+    Day02 d2 = new Day02();
+    String file = "src\\Day02Input.txt";
+    int checksum;
 
     long sTime = System.nanoTime();
-    int freqTwice = d1.calibrateFrequencyTwice(file);
+    checksum = d2.getChecksum(file);
     long eTime = System.nanoTime();
 
-    System.out.println(freqTwice);
+    System.out.println("Checksum:" + checksum);
     System.out.println("Duration: " + (eTime - sTime) / 1000000 + "ms");
   }
 }
