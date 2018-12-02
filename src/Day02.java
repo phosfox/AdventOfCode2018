@@ -1,10 +1,8 @@
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Day02 {
@@ -28,7 +26,7 @@ public class Day02 {
     this.threes = threes;
   }
 
-  public int[] countLetter(String s) {
+  private int[] countLetter(String s) {
     int total2 = 0, total3 = 0;
     HashMap<Character, Integer> hs = new HashMap<>();
     int[] totals = new int[2];
@@ -81,5 +79,55 @@ public class Day02 {
     }
 
     return this.getTwos() * this.getThrees();
+  }
+
+  public String solvePart2(String file) throws IOException {
+    ArrayList<String> fileContent = new ArrayList<>();
+    Files.lines(Paths.get(file)).forEach(fileContent::add);
+
+    for (String word : fileContent) {
+      for (String comp : fileContent) {
+        if (!word.equals(comp)) {
+          if (diffByOne(word, comp)) {
+            return revomeDiffChar(word, comp);
+          }
+        }
+      }
+    }
+    return "";
+  }
+
+  public boolean diffByOne(String word, String comp) {
+    int diffs = 0;
+    char[] wordArr = word.toCharArray();
+    char[] compArr = comp.toCharArray();
+
+    if (word.length() != comp.length()) {
+      return false;
+    }
+
+    for (int i = 0; i < word.length(); i++) {
+      if (diffs > 1) {
+        return false;
+      }
+      if (wordArr[i] != compArr[i]) {
+        diffs++;
+      }
+    }
+
+    return diffs == 1;
+  }
+
+  private String revomeDiffChar(String word, String comp) {
+    char[] wordArr = word.toCharArray();
+    char[] compArr = comp.toCharArray();
+    StringBuilder s = new StringBuilder();
+    for (int i = 0; i < word.length(); i++) {
+      if (wordArr[i] != compArr[i]) {
+        continue;
+      }
+      s.append(wordArr[i]);
+    }
+    return s.toString();
   }
 }

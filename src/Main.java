@@ -15,13 +15,15 @@ public class Main {
 
     Day02 d2 = new Day02();
     String file = "src\\Day02Input.txt";
-    int checksum;
+    //int checksum;
 
     long sTime = System.nanoTime();
-    checksum = d2.getChecksum(file);
+    String s = d2.solvePart2(file);
     long eTime = System.nanoTime();
 
-    System.out.println("Checksum:" + checksum);
+    System.out.println("String:" + s);
     System.out.println("Duration: " + (eTime - sTime) / 1000000 + "ms");
+
+
   }
 }
