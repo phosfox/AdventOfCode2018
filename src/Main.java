@@ -30,10 +30,10 @@ public class Main {
     Rectangle r3 = new Rectangle(3, 5, 5, 2, 2);
     Rectangle r4 = new Rectangle(4, 1, 1, 1, 1);
 
-    System.out.println(r1.overlapsWith(r2));
-    System.out.println(r1.overlapsWith(r3));
-    System.out.println(r2.overlapsWith(r3));
-    System.out.println(r4.overlapsWith(r1));
+    System.out.println(r1.overlapsWith(r2) + " should true");
+    System.out.println(r1.overlapsWith(r3) + " should false");
+    System.out.println(r2.overlapsWith(r3) + " should false");
+    System.out.println(r4.overlapsWith(r1) + " should false");
 
     System.out.println("Duration: " + (eTime - sTime) / 1000000 + "ms");
 

@@ -18,7 +18,18 @@ public class Rectangle {
   }
 
   private boolean valueInRange(int value, int min, int max) {
-    return (value >= min) && (value <= max);
+    return (value >= min) && (value < max);
+  }
+
+  @Override
+  public String toString() {
+    return "Rectangle{" +
+        "number=" + number +
+        ", x=" + x +
+        ", y=" + y +
+        ", width=" + width +
+        ", height=" + height +
+        '}';
   }
 
   public int getNumber() {

@@ -36,9 +36,10 @@ public class Day03 {
 
   public int solveDay03Part1(String fileName) throws IOException {
     ArrayList<Rectangle> recs = parseRectangles(fileName);
-
+    //recs.forEach(System.out::println);
     int claimedInches = 0;
     int claimedTwice = 0;
+
     for (int x = 0; x <= 1000; x++) {
       for (int y = 0; y <= 1000; y++) {
         Rectangle oneByOne = new Rectangle(0, x, y, 1, 1);
@@ -52,6 +53,7 @@ public class Day03 {
             break;
           }
         }
+        claimedTwice = 0;
       }
     }
     return claimedInches;
