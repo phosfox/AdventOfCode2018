@@ -36,9 +36,8 @@ public class Day03 {
 
   public int solveDay03Part1(String fileName) throws IOException {
     ArrayList<Rectangle> recs = parseRectangles(fileName);
-    //recs.forEach(System.out::println);
     int claimedInches = 0;
-    int claimedTwice = 0;
+    int claimedTwice;
 
     for (int x = 0; x <= 1000; x++) {
       for (int y = 0; y <= 1000; y++) {
@@ -58,6 +57,30 @@ public class Day03 {
     return claimedInches;
   }
 
+  public int solveDay03Part2(String fileName) throws IOException {
+    ArrayList<Rectangle> recs = parseRectangles(fileName);
+    return getUnclaimedID(recs);
+  }
+
+  private int getUnclaimedID(ArrayList<Rectangle> recs) {
+    boolean unclaimed;
+
+    for (Rectangle r : recs) {
+      unclaimed = true;
+      for (Rectangle r2 : recs) {
+        if (r.equals(r2)) {
+          continue;
+        }
+        if (r.overlapsWith(r2)) {
+          unclaimed = false;
+        }
+      }
+      if (unclaimed) {
+        return r.getNumber();
+      }
+    }
+    return -1;
+  }
 }
 
 
