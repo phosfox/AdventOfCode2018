@@ -17,13 +17,13 @@ public class Main {
     //Day02 d2 = new Day02();
     //String file = "src\\Day02Input.txt";
 
-    String file = "src\\\\Day03Input.txt";
-    Day03 d3 = new Day03();
+    String file = "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day05Input.txt";
+    Day05 d = new Day05();
     long sTime = System.nanoTime();
-    int inches = d3.solveDay03Part2(file);
+    d.solveDay05Part1(file);
     long eTime = System.nanoTime();
 
-    System.out.println("Unclaimed Tilenumber:" + inches);
+
 
     //Rectangle r1 = new Rectangle(1, 1, 3, 4, 4);
     //Rectangle r2 = new Rectangle(2, 3, 1, 4, 4);
