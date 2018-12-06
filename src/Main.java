@@ -17,12 +17,11 @@ public class Main {
     //Day02 d2 = new Day02();
     //String file = "src\\Day02Input.txt";
 
-    String file = "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day05Input.txt";
-    Day05 d = new Day05();
+    String file = "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day06Input.txt";
+    Day06 d = new Day06();
     long sTime = System.nanoTime();
-    d.solveDay05Part2(file);
+    d.solvePart1(file);
     long eTime = System.nanoTime();
-
     System.out.println("Duration: " + (eTime - sTime) / 1000000 + "ms");
 
 
