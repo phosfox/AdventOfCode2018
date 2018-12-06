@@ -7,20 +7,23 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
 
-    //DAY 01
-    //String file = "src\\Day01Input.txt";
-    //Day01 d1 = new Day01();
-    //int freqResult = d1.calibrateFrequency(file);
-    //int freqTwice = d1.calibrateFrequencyTwice(file);
-
-    //Day02
-    //Day02 d2 = new Day02();
-    //String file = "src\\Day02Input.txt";
-
     //Manhattan Distance
     // A = (x1,y1) B = (x2,y2)
     // H(A-B) = |x1 - x2| + |y1 - y2|
 
+    /*   iterate i
+        i=0           i=1           i=2
+    ..........    .a........    aaa.......
+    .A........    aAa.......    aAaa....c.
+    ..........    .a......c.    aaad...ccc
+    ........C.    ...d...cCc    .adddeccCc
+    ...D......    ..dDde..c.    ..dDdeeccc
+    .....E....    .b.deEe...    bb.deEeec.
+    .B........    bBb..e....    bBb.eee...
+    ..........    .b........    bbb..e..f.
+    ..........    ........f.    .b.....fff
+    ........F.    .......fFf    ......ffFf
+    */
     String file = "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day06Input.txt";
     Day06 d = new Day06();
     long sTime = System.nanoTime();
@@ -30,6 +33,5 @@ public class Main {
 
     Coordinate c1 = new Coordinate(30, 2);
     Coordinate c2 = new Coordinate(2, 10);
-    System.out.println(d.getManhattanDist(c1, c2));
   }
 }

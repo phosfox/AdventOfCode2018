@@ -2,6 +2,15 @@ public class Coordinate {
   private int x,y;
   private static int instanceCounter = 0;
   private int id;
+  private int dist = 1;
+
+  public int getDist() {
+    return dist;
+  }
+
+  public void setDist(int dist) {
+    this.dist = dist;
+  }
 
   @Override
   public String toString() {
@@ -9,6 +18,7 @@ public class Coordinate {
         "x=" + x +
         ", y=" + y +
         ", id=" + id +
+        ", dist=" + dist +
         '}';
   }
 
