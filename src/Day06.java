@@ -7,12 +7,16 @@ import java.util.ArrayList;
 
 public class Day06 {
 
+
   private int[][] grid = new int[400][400];
 
   public void solvePart1(String fileName) throws IOException {
     ArrayList<Coordinate> coords = getInput(fileName);
     setGrid(coords);
-    drawGrid();
+  }
+
+  public int getManhattanDist(Coordinate c1, Coordinate c2) {
+    return Math.abs((c1.getX() - c2.getX()) + (c1.getY() - c2.getY()));
   }
 
   private ArrayList<Coordinate> getInput(String fileName) throws IOException {
