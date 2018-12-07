@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -28,7 +26,6 @@ public class Day06 {
 
     setGrid(maxX, maxY);
     regions = new HashMap<>();
-
     for (int x = 0; x <= maxX; x++) {
       for (int y = 0; y <= maxY; y++) {
         int best = maxX + maxY;
@@ -65,6 +62,7 @@ public class Day06 {
 
     int inArea = 0;
 
+
     for (int x = 0; x <= maxX; x++) {
       for (int y = 0; y <= maxY; y++) {
         int size = 0;
@@ -83,7 +81,6 @@ public class Day06 {
     }
 
     System.out.println("Area Size: " + inArea);
-    //drawGrid();
   }
 
   /**
