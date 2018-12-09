@@ -20,8 +20,12 @@ public class Day04 {
 
   HashSet<Guard> guards;
 
+  public Day04() {
+    this.guards = new HashSet<>();
+  }
+
   public void solvePart1() throws IOException {
-    String fileName = "C:\\Users\\mordr\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day04Input.txt";
+    String fileName = "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day04Input.txt";
     ArrayList<String> input = new ArrayList<>();
     Stack<Guard> guardStack = new Stack<>();
     try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
