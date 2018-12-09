@@ -11,14 +11,9 @@ public class Main {
     String file = "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day07Input.txt";
     Day04 d = new Day04();
     long sTime = System.nanoTime();
-    d.solvePart1();
+    d.solvePart1And2();
     long eTime = System.nanoTime();
 
-    Guard g = new Guard(1);
-    g.fallsAsleepAt(24);
-    g.wakesUpAt(28);
-    System.out.println(g.getTimeAsleep());
-    System.out.println(g.getMinAsleep());
     System.out.println("Duration: " + (eTime - sTime) / 1000000 + "ms");
 
   }
