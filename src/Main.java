@@ -9,8 +9,9 @@ public class Main {
 
 
     String file = "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day07Input.txt";
-
+    Day04 d = new Day04();
     long sTime = System.nanoTime();
+    d.solvePart1();
     long eTime = System.nanoTime();
 
     Guard g = new Guard(1);
