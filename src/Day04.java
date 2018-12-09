@@ -38,16 +38,23 @@ public class Day04 {
     Matcher guardM, fallsM, wakesM;
 
     for (String line : input) {
+      System.out.println(line.substring(15,17));
       guardM = guardP.matcher(line);
       fallsM = fallsP.matcher(line);
       wakesM = wakesP.matcher(line);
       if (guardM.find()) {
-        Guard g = new Guard(Integer.parseInt(guardM.group(1)));
+        if (!guardStack.empty()) {
+          guardStack.pop();
+        }
+        int id = Integer.parseInt(guardM.group(1));
+        Guard g = new Guard(id);
         guards.add(g);
         guardStack.push(g);
+
       }
       if (fallsM.find()) {
-
+        int t = Integer.parseInt(line.substring(15,17));
+        guardStack.peek().fallsAsleepAt(t);
       }
       if (wakesM.find()) {
 
