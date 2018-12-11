@@ -19,14 +19,14 @@ import java.util.regex.Pattern;
 
 public class Day04 {
 
-  HashMap<Integer, Guard> guards;
+  private HashMap<Integer, Guard> guards;
 
   public Day04() {
     this.guards = new HashMap<>();
   }
 
   public void solvePart1And2() throws IOException {
-    String fileName = "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day04InputSorted.txt";
+    String fileName = "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day04Input.txt";
     ArrayList<String> input = new ArrayList<>();
     Stack<Integer> guardStack = new Stack<>();
     try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
