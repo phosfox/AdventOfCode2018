@@ -5,7 +5,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.Rectangle2D.Double;
 import javax.swing.JPanel;
 
-public class Point extends JPanel{
+public class Point extends JPanel {
 
   @Override
   public String toString() {
@@ -19,6 +19,8 @@ public class Point extends JPanel{
 
   private int posX, posY;
   private int velX, velY;
+  private int xCounter = 0;
+  private int yCounter = 0;
 
   public Point(int posX, int posY, int velX, int velY) {
     this.posX = posX;
@@ -28,21 +30,8 @@ public class Point extends JPanel{
   }
 
   public void movePoint() {
-    this.posX += this.velX;
-    this.posY += this.velY;
-  }
-
-  public void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    this.draw(g);
-  }
-
-  public void draw(Graphics g) {
-    Graphics2D g2d = (Graphics2D) g;
-    Rectangle2D.Double rect = new Rectangle2D.Double(this.posX, this.posY, 5, 5);
-
-    g2d.setColor(Color.BLACK);
-    g2d.fill(rect);
+    this.posX += this.velX * xCounter++;
+    this.posY += this.velY * yCounter++;
   }
 
   public int getPosX() {
