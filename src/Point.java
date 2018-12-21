@@ -19,19 +19,20 @@ public class Point extends JPanel {
 
   private int posX, posY;
   private int velX, velY;
-  private int xCounter = 0;
-  private int yCounter = 0;
+  private int orgX, orgY;
 
   public Point(int posX, int posY, int velX, int velY) {
     this.posX = posX;
     this.posY = posY;
     this.velX = velX;
     this.velY = velY;
+    this.orgX = posX;
+    this.orgY = posY;
   }
 
-  public void movePoint() {
-    this.posX += this.velX * xCounter++;
-    this.posY += this.velY * yCounter++;
+  public void movePoint(int t) {
+    this.posX = this.orgX + this.velX * t;
+    this.posY = this.orgY + this.velY * t;
   }
 
   public int getPosX() {

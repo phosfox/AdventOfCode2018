@@ -1,3 +1,4 @@
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -7,6 +8,8 @@ import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -19,10 +22,11 @@ public class Day10 {
 
   private ArrayList<Point> points;
   private int minX, minY, maxX, maxY;
+  private HashMap<Integer,Integer> xyMap;
 
   public Day10() throws IOException {
     points = getPoints();
-
+    xyMap = new HashMap<>();
   }
 
   public static void main(String[] args) throws IOException {
@@ -31,6 +35,7 @@ public class Day10 {
 
   private void main() throws IOException {
     System.out.println(getMinArea());
+    displayPoints();
   }
 
   private void setBounds() {
@@ -49,16 +54,22 @@ public class Day10 {
     return area;
   }
 
-  private void movePointsBy() {
+  private void movePointsBy(int t) {
     for (Point p : this.points) {
-      p.movePoint();
+      p.movePoint(t);
+    }
+  }
+
+  private void putPointsIntoMap() {
+    for (Point p : points) {
+      xyMap.putIfAbsent(p.getPosX(), p.getPosY());
     }
   }
 
   private int getMinArea() {
     BigInteger prev = getArea();
     for (int i = 0; i < 12000; i++) {
-      movePointsBy();
+      movePointsBy(i);
       BigInteger a = getArea();
       if (a.compareTo(prev) > 0) {
         return i;
@@ -68,9 +79,41 @@ public class Day10 {
     return -1;
   }
 
+
+  private void displayPoints() {
+    putPointsIntoMap();
+    ArrayList<ArrayList<Character>> rows = new ArrayList<>();
+    for (int y = minY; y < maxY + 1; y++) {
+      ArrayList<Character> row = new ArrayList<>();
+      for (int x = minX; x < maxX + 1; x++) {
+        if (xyMap.get(x) == y) {
+          row.add('*');
+        } else {
+          row.add(' ');
+        }
+      }
+      rows.add(row);
+    }
+    for (ArrayList<Character> row : rows) {
+      for (Character c : row) {
+        System.out.printf("%c", c);
+      }
+      System.out.println(" ");
+    }
+  }
+
+  private boolean inPoints(int x, int maxY) {
+    for (Point p : points) {
+      if (p.getPosX() == x && p.getPosY() == maxY) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   private ArrayList<Point> getPoints() throws IOException {
     List<String> lines = Files.readAllLines(Paths.get(
-        "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day10Input_test.txt"));
+        "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day10Input.txt"));
 
     points = new ArrayList<>();
     Pattern pattern = Pattern
