@@ -22,7 +22,7 @@ public class Day10 {
 
   private ArrayList<Point> points;
   private int minX, minY, maxX, maxY;
-  private HashMap<Integer,Integer> xyMap;
+  private HashMap<Integer, Integer> xyMap;
 
   public Day10() throws IOException {
     points = getPoints();
@@ -66,13 +66,22 @@ public class Day10 {
     }
   }
 
+  private boolean isInPoints(int x, int y) {
+    for (Point p : points) {
+      if (p.getPosX() == x && p.getPosY() == y) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   private int getMinArea() {
     BigInteger prev = getArea();
-    for (int i = 0; i < 12000; i++) {
+    for (int i = 1; i < 12000; i++) {
       movePointsBy(i);
       BigInteger a = getArea();
       if (a.compareTo(prev) > 0) {
-        return i;
+        return i - 1;
       }
       prev = a;
     }
@@ -86,10 +95,10 @@ public class Day10 {
     for (int y = minY; y < maxY + 1; y++) {
       ArrayList<Character> row = new ArrayList<>();
       for (int x = minX; x < maxX + 1; x++) {
-        if (xyMap.get(x) == y) {
+        if (isInPoints(x, y)) {
           row.add('*');
         } else {
-          row.add(' ');
+          row.add('_');
         }
       }
       rows.add(row);
@@ -102,18 +111,10 @@ public class Day10 {
     }
   }
 
-  private boolean inPoints(int x, int maxY) {
-    for (Point p : points) {
-      if (p.getPosX() == x && p.getPosY() == maxY) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   private ArrayList<Point> getPoints() throws IOException {
     List<String> lines = Files.readAllLines(Paths.get(
-        "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day10Input.txt"));
+        "C:\\Users\\Constantin\\IdeaProjects\\AdventOfCode2018\\src\\Inputs\\Day10Input_2.txt"));
 
     points = new ArrayList<>();
     Pattern pattern = Pattern
