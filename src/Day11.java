@@ -5,16 +5,19 @@ public class Day11 {
   private int puzzleInput;
 
   public Day11(int size, int input) {
-    this.grid = new int[size][size];
-    this.gridSize = size;
+    this.grid = new int[size + 1][size + 1];
+    this.gridSize = size + 1;
     puzzleInput = input;
     setGrid();
   }
 
   private void setGrid() {
-    for (int x = 0; x < this.gridSize; x++) {
-      for (int y = 0; y < this.gridSize; y++) {
-        this.grid[x][y] = getPower(x + 1, y + 1, this.puzzleInput);
+    for (int x = 1; x < this.gridSize; x++) {
+      for (int y = 1; y < this.gridSize; y++) {
+        this.grid[x][y] =
+            getPower(x, y, this.puzzleInput) + this.grid[x][y - 1] + this.grid[x - 1][y]
+                - this.grid[x - 1][y - 1];
+        //this.grid[x][y] = getPower(x + 1, y + 1, this.puzzleInput);
       }
     }
   }
@@ -31,34 +34,26 @@ public class Day11 {
 
   public int getPower(int x, int y, int serial) {
     int rackID = x + 10;
-    int powerLvl = rackID * y;
-    int buf = (powerLvl + serial) * rackID;
-    int digit;
-    if (buf > 99) {
-      String s = Integer.toString(buf);
-      digit = Character.getNumericValue(s.charAt(s.length() - 3));
-    } else {
-      digit = 0;
-    }
-    return digit - 5;
+    return (((rackID * y + serial) * rackID) / 100) % 10 - 5;
   }
 
   private void findLargestSquareWith3() {
     int largest = Integer.MIN_VALUE;
     int squarePower;
     int biggestX = 0, biggestY = 0;
-    for (int x = 0; x < this.gridSize; x++) {
-      for (int y = 0; y < this.gridSize; y++) {
-        squarePower = powerOfSquare(x, y, 3);
+    int size = 3;
+    for (int x = 1; x < this.gridSize - size + 1; x++) {
+      for (int y = 1; y < this.gridSize - size + 1; y++) {
+        squarePower = powerOfSquare(x, y, size);
         if (squarePower > largest) {
           largest = squarePower;
-          biggestX = x + 1;
-          biggestY = y + 1;
+          biggestX = x;
+          biggestY = y;
         }
       }
     }
 
-    System.out.printf("Coordinates of largest 3x3 square %d,%d", biggestX, biggestY);
+    System.out.printf("Coordinates of largest 3x3 square %d,%d\n", biggestX, biggestY);
   }
 
   private void findLargestSquare() {
@@ -66,41 +61,28 @@ public class Day11 {
     int squarePower;
     int biggestX = 0, biggestY = 0;
     int size = 0;
-    for (int x = 0; x < this.gridSize; x++) {
-      for (int y = 0; y < this.gridSize; y++) {
-        for (int i = 1; i < this.gridSize; i++) {
+    for (int i = 0; i < this.gridSize; i++) {
+      for (int x = 1; x < this.gridSize - i + 1; x++) {
+        for (int y = 1; y < this.gridSize - i + 1; y++) {
           squarePower = powerOfSquare(x, y, i);
           if (squarePower > largest) {
             largest = squarePower;
-            biggestX = x + 1;
-            biggestY = y + 1;
+            biggestX = x;
+            biggestY = y;
             size = i;
           }
         }
       }
     }
 
-    System.out.printf("Coordinates of largest square %d,%d,%d", biggestX, biggestY, size);
+    System.out.printf("Coordinates of largest square %d,%d,%d\n", biggestX, biggestY, size);
   }
 
 
   private int powerOfSquare(int x, int y, int size) {
-    int total = 0;
-    int xBound = x + size, yBound = y + size;
-    if (xBound >= this.gridSize - 1) {
-      xBound = this.gridSize - 1;
-    }
-    if (yBound >= this.gridSize - 1) {
-      yBound = this.gridSize - 1;
-    }
-
-    for (int i = x; i < xBound; i++) {
-      for (int j = y; j < yBound; j++) {
-        total += this.grid[i][j];
-      }
-    }
-
-    return total;
+    int x0 = x - 1, x1 = x + size - 1;
+    int y0 = y - 1, y1 = y + size - 1;
+    return this.grid[x0][y0] + this.grid[x1][y1] - this.grid[x1][y0] - this.grid[x0][y1];
   }
 
   public void solvePart1() {
@@ -112,7 +94,7 @@ public class Day11 {
   }
 
   public void main() {
-    //solvePart1();
+    solvePart1();
     solvePart2();
   }
 
